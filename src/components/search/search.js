@@ -6,19 +6,20 @@ const Search = ({ onSearchChange }) => {
   const [search, setSearch] = useState(null);
 
   const loadOptions = async (inputValue) => {
-    const response = await fetch(
+    return await fetch(
       `${GEO_API_URL}/cities?minPopulation=1000000&namePrefix=${inputValue}`,
       geoApiOptions
-    ).then((response) => response.json());
-    
-    return {
-      options: response.data.map((city) => {
-        return {
-          value: `${city.latitude} ${city.longitude}`,
-          label: `${city.name}, ${city.countryCode}`,
-        };
-      }),
-    };
+    ).then((response) => response.json()
+    ).then((response) => {
+      return {
+        options: response.data.map((city) => {
+          return {
+            value: `${city.latitude} ${city.longitude}`,
+            label: `${city.name}, ${city.countryCode}`,
+          };
+        }),
+      }
+    });
   };
 
   const handleOnChange = (searchData) => {
