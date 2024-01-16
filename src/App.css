@@ -1,6 +1,6 @@
 .container {
   max-width: 1086px;
-  display: flex;
-  justify-content: center;
+  display: block;
+  padding: 0 20%;
   margin-top: 50px;
 }
