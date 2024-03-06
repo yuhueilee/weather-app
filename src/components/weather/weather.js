@@ -6,8 +6,12 @@ const weather = () => {
             <div className="top">
                 <p className="city">London</p>
                 <p className="description">Rainy</p>
+                <img
+                    alt="weather"
+                    className="weatherIcon"
+                    src="icons/01d.png"
+                />
             </div>
-            <img alt="weather" className="weatherIcon" src="icons/01d.png" />
         </div>
     );
 };
