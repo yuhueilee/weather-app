@@ -1,6 +1,6 @@
 import "./weather.scss";
 
-const weather = ({ data }) => {
+const Weather = ({ data }) => {
     return (
         <div className="weather">
             <div className="top">
@@ -50,4 +50,4 @@ const weather = ({ data }) => {
     );
 };
 
-export default weather;
+export default Weather;
