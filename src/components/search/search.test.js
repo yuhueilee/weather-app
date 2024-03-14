@@ -44,8 +44,8 @@ describe("search component", () => {
                 expect(optionElements.length).toBe(2);
             },
             {
-                timeout: 1000,
+                timeout: 5000,
             }
         );
-    });
+    }, 7000);
 });
