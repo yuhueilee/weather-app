@@ -40,7 +40,7 @@ describe("search component", () => {
         render(<Search onSearchChange={mockOnSearchChange} />);
         const searchElement = screen.getByRole("combobox");
         fireEvent.focus(searchElement);
-        const optionElements = await screen.findAllByRole("paragraph");
+        const optionElements = await screen.findAllByRole("option");
         expect(optionElements.length).toBe(2);
     });
 });
