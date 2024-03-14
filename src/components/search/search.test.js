@@ -38,12 +38,14 @@ describe("search component", () => {
         });
 
         render(<Search onSearchChange={mockOnSearchChange} />);
-        await waitFor(() => {
-            // screen.debug();
-            return expect(global.fetch).toHaveBeenCalledTimes(2);
-        });
-
-        // const optionElements = await screen.findAllByRole("option");
-        // expect(optionElements.length).toBe(2);
+        await waitFor(
+            () => {
+                const optionElements = screen.queryAllByRole("option");
+                expect(optionElements.length).toBe(2);
+            },
+            {
+                timeout: 1000,
+            }
+        );
     });
 });
