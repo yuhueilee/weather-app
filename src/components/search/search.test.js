@@ -14,6 +14,12 @@ describe("search component", () => {
         expect(searchElement).toBeInTheDocument();
     });
 
+    it("should display placeholder text", () => {
+        render(<Search onSearchChange={mockOnSearchChange} />);
+        const textElement = screen.getByText("Search for city");
+        expect(textElement).toBeInTheDocument();
+    });
+
     it("should load static option initially", async () => {
         jest.spyOn(global, "fetch").mockImplementationOnce(() => {
             return Promise.resolve({
