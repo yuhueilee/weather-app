@@ -39,7 +39,7 @@ describe("search component", () => {
     it("should load option initially", async () => {
         render(<Search onSearchChange={mockOnSearchChange} />);
         const searchElement = screen.getByRole("combobox");
-        fireEvent.click(searchElement);
+        fireEvent.focus(searchElement);
         const optionElements = await screen.findAllByRole("paragraph");
         expect(optionElements.length).toBe(2);
     });
