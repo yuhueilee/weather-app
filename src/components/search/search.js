@@ -23,6 +23,10 @@ const Search = ({ onSearchChange }) => {
             });
     };
 
+    // const loadStaticOptions = () => {
+    //     return { options: [{ value: "11 23", label: "London, GB" }] };
+    // };
+
     const handleOnChange = (searchData) => {
         setSearch(searchData);
         onSearchChange(searchData);
@@ -35,6 +39,7 @@ const Search = ({ onSearchChange }) => {
             value={search}
             onChange={handleOnChange}
             loadOptions={loadOptions}
+            menuIsOpen={true}
         />
     );
 };
