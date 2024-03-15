@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Search from "./search";
 
 const mockOnSearchChange = jest.fn();
@@ -46,9 +46,7 @@ describe("search component", () => {
         render(<Search onSearchChange={mockOnSearchChange} />);
         const searchElement = screen.getByRole("combobox");
         fireEvent.change(searchElement, { target: { value: "L" } });
-        await waitFor(() => {
-            const optionElements = screen.queryAllByRole("option");
-            expect(optionElements.length).toBe(2);
-        });
+        const optionElements = await screen.findAllByRole("option");
+        expect(optionElements.length).toBe(2);
     });
 });
