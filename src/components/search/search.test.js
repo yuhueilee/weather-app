@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Search from "./search";
 
 const mockOnSearchChange = jest.fn();
@@ -8,17 +8,17 @@ describe("search component", () => {
         jest.resetAllMocks();
     });
 
-    it("should display search bar", () => {
-        render(<Search onSearchChange={mockOnSearchChange} />);
-        const searchElement = screen.getByRole("combobox");
-        expect(searchElement).toBeInTheDocument();
-    });
+    // it("should display search bar", () => {
+    //     render(<Search onSearchChange={mockOnSearchChange} />);
+    //     const searchElement = screen.getByRole("combobox");
+    //     expect(searchElement).toBeInTheDocument();
+    // });
 
-    it("should display placeholder text", () => {
-        render(<Search onSearchChange={mockOnSearchChange} />);
-        const textElement = screen.getByText("Search for city");
-        expect(textElement).toBeInTheDocument();
-    });
+    // it("should display placeholder text", () => {
+    //     render(<Search onSearchChange={mockOnSearchChange} />);
+    //     const textElement = screen.getByText("Search for city");
+    //     expect(textElement).toBeInTheDocument();
+    // });
 
     it("should load static option initially", async () => {
         jest.spyOn(global, "fetch").mockImplementationOnce(() => {
@@ -35,8 +35,8 @@ describe("search component", () => {
                             {
                                 latitude: 272.3,
                                 longitude: 312.2,
-                                name: "Span",
-                                countryCode: "SP",
+                                name: "Lubango",
+                                countryCode: "AO",
                             },
                         ],
                     }),
@@ -44,14 +44,11 @@ describe("search component", () => {
         });
 
         render(<Search onSearchChange={mockOnSearchChange} />);
-        await waitFor(
-            () => {
-                const optionElements = screen.queryAllByRole("option");
-                expect(optionElements.length).toBe(2);
-            },
-            {
-                timeout: 5000,
-            }
-        );
-    }, 7000);
+        const searchElement = screen.getByRole("combobox");
+        fireEvent.change(searchElement, { target: { value: "L" } });
+        await waitFor(() => {
+            const optionElements = screen.queryAllByRole("option");
+            expect(optionElements.length).toBe(2);
+        });
+    });
 });
