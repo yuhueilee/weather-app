@@ -11,13 +11,13 @@ describe("search component", () => {
     it("should display search bar", () => {
         render(<Search onSearchChange={mockOnSearchChange} />);
         const searchElement = screen.getByRole("combobox");
-        expect(searchElement).toBeInTheDocument();
+        return expect(searchElement).toBeInTheDocument();
     });
 
     it("should display placeholder text", () => {
         render(<Search onSearchChange={mockOnSearchChange} />);
         const textElement = screen.getByText("Search for city");
-        expect(textElement).toBeInTheDocument();
+        return expect(textElement).toBeInTheDocument();
     });
 
     it("should load options when entering input", async () => {
@@ -46,7 +46,6 @@ describe("search component", () => {
         render(<Search onSearchChange={mockOnSearchChange} />);
         const searchElement = screen.getByRole("combobox");
         fireEvent.change(searchElement, { target: { value: "L" } });
-        const optionElements = await screen.findAllByRole("option");
-        expect(optionElements.length).toBe(2);
+        return expect(screen.findAllByRole("option")).resolves.toHaveLength(2);
     });
 });
