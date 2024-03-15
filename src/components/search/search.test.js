@@ -20,7 +20,7 @@ describe("search component", () => {
     //     expect(textElement).toBeInTheDocument();
     // });
 
-    it("should load static option initially", async () => {
+    it("should load options when entering input", async () => {
         jest.spyOn(global, "fetch").mockImplementationOnce(() => {
             return Promise.resolve({
                 json: () =>
