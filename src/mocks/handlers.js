@@ -1,7 +1,25 @@
 import { http, HttpResponse } from "msw";
-import { WEATHER_API_URL } from "../api";
+import { GEO_API_URL, WEATHER_API_URL } from "../api";
 
 export const handlers = [
+    http.get(`${GEO_API_URL}/cities`, () => {
+        return HttpResponse.json({
+            data: [
+                {
+                    name: "Greater London",
+                    countryCode: "GB",
+                    latitude: 51.5,
+                    longitude: -0.083333333,
+                },
+                {
+                    name: "London",
+                    countryCode: "GB",
+                    latitude: 51.507222222,
+                    longitude: -0.1275,
+                },
+            ],
+        });
+    }),
     http.get(`${WEATHER_API_URL}/weather`, () => {
         return HttpResponse.json({
             coord: {
