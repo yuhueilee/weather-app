@@ -23,4 +23,15 @@ describe("search component", () => {
         fireEvent.change(searchElement, { target: { value: "L" } });
         return expect(screen.findAllByRole("option")).resolves.toHaveLength(2);
     });
+
+    it("should display option after selected", async () => {
+        render(<Search onSearchChange={mockOnSearchChange} />);
+        const searchElement = screen.getByRole("combobox");
+        fireEvent.change(searchElement, { target: { value: "L" } });
+        const optionElement = await screen.findByRole("option", {
+            name: "London, GB",
+        });
+        fireEvent.click(optionElement);
+        return expect(screen.getByText("London, GB")).toBeInTheDocument();
+    });
 });
