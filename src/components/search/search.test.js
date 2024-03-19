@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import Search from "./search";
 
@@ -20,18 +21,18 @@ describe("search component", () => {
     it("should load options when entering input", async () => {
         render(<Search onSearchChange={mockOnSearchChange} />);
         const searchElement = screen.getByRole("combobox");
-        fireEvent.change(searchElement, { target: { value: "L" } });
+        await userEvent.type(searchElement, "L");
         return expect(screen.findAllByRole("option")).resolves.toHaveLength(2);
     });
 
     it("should display option after selected", async () => {
         render(<Search onSearchChange={mockOnSearchChange} />);
         const searchElement = screen.getByRole("combobox");
-        fireEvent.change(searchElement, { target: { value: "L" } });
+        await userEvent.type(searchElement, "L");
         const optionElement = await screen.findByRole("option", {
             name: "London, GB",
         });
-        fireEvent.click(optionElement);
+        await userEvent.click(optionElement);
         return expect(screen.getByText("London, GB")).toBeInTheDocument();
     });
 });
