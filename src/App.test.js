@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import App from "./App";
-import userEvent from "@testing-library/user-event";
 
 describe("app component", () => {
     it("should display weather description after option is selected", async () => {
