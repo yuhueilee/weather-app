@@ -117,4 +117,16 @@ describe("forecast component", () => {
         const labelElement = screen.getByTestId("forecast-temperature-0");
         return expect(labelElement.textContent).toBe("9°C /8°C");
     });
+
+    it("should display wind speed", () => {
+        render(<Forecast data={mockData} />);
+        const windSpeedElement = screen.getByTestId("forecast-wind-speed-0");
+        return expect(windSpeedElement.textContent).toBe("Wind speed:2.08 m/s");
+    });
+
+    it("should display rounded feels like", () => {
+        render(<Forecast data={mockData} />);
+        const feelsLikeElement = screen.getByTestId("forecast-feels-like-0");
+        return expect(feelsLikeElement.textContent).toBe("Feels like:8°C");
+    });
 });
