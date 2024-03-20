@@ -83,6 +83,11 @@ const mockData = {
 };
 
 describe("forecast component", () => {
+    beforeEach(() => {
+        // Mock the current day to be Wednesday.
+        global.Date.getDay = jest.fn(() => new Date("2024-03-20").getDay());
+    });
+
     it("should display title", () => {
         render(<Forecast data={mockData} />);
         const titleElement = screen.getByText(/daily/i);
@@ -93,5 +98,11 @@ describe("forecast component", () => {
         render(<Forecast data={mockData} />);
         const imageElements = screen.getAllByAltText("weather");
         return expect(imageElements).toHaveLength(2);
+    });
+
+    it("should display 'Thursday' first under the forecast list", () => {
+        render(<Forecast data={mockData} />);
+        const labelElement = screen.getByTestId("day-0");
+        return expect(labelElement.textContent).toBe("Thursday");
     });
 });

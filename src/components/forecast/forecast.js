@@ -36,7 +36,10 @@ const Forecast = ({ data }) => {
                                         className="icon-small"
                                         src={`icons/${item.weather[0].icon}.png`}
                                     />
-                                    <label className="day">
+                                    <label
+                                        className="day"
+                                        data-testid={`day-${index}`}
+                                    >
                                         {forecastDays[index]}
                                     </label>
                                 </div>
