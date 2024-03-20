@@ -102,7 +102,13 @@ describe("forecast component", () => {
 
     it("should display 'Thursday' first under the forecast list", () => {
         render(<Forecast data={mockData} />);
-        const labelElement = screen.getByTestId("day-0");
+        const labelElement = screen.getByTestId("forecast-day-0");
         return expect(labelElement.textContent).toBe("Thursday");
+    });
+
+    it("should display weather description", () => {
+        render(<Forecast data={mockData} />);
+        const labelElement = screen.getByTestId("forecast-description-1");
+        return expect(labelElement.textContent).toBe("broken clouds");
     });
 });

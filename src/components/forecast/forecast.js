@@ -38,9 +38,15 @@ const Forecast = ({ data }) => {
                                     />
                                     <label
                                         className="day"
-                                        data-testid={`day-${index}`}
+                                        data-testid={`forecast-day-${index}`}
                                     >
                                         {forecastDays[index]}
+                                    </label>
+                                    <label
+                                        className="description"
+                                        data-testid={`forecast-description-${index}`}
+                                    >
+                                        {item.weather[0].description}
                                     </label>
                                 </div>
                             </AccordionItemButton>
