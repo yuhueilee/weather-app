@@ -1,13 +1,11 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
 import Search from "./search";
 
 const mockOnSearchChange = jest.fn();
 
 describe("search component", () => {
-    beforeEach(() => {
-        jest.resetAllMocks();
-    });
-
     it("should display search bar", () => {
         render(<Search onSearchChange={mockOnSearchChange} />);
         const searchElement = screen.getByRole("combobox");
@@ -20,63 +18,21 @@ describe("search component", () => {
         return expect(textElement).toBeInTheDocument();
     });
 
-    it("should call fetch once when input value change", async () => {
-        jest.spyOn(global, "fetch").mockImplementationOnce(() => {
-            return Promise.resolve({
-                json: () =>
-                    Promise.resolve({
-                        data: [
-                            {
-                                latitude: 12.3,
-                                longitude: 382.2,
-                                name: "London",
-                                countryCode: "GB",
-                            },
-                            {
-                                latitude: 272.3,
-                                longitude: 312.2,
-                                name: "Lubango",
-                                countryCode: "AO",
-                            },
-                        ],
-                    }),
-            });
-        });
-
+    it("should load options when entering input", async () => {
         render(<Search onSearchChange={mockOnSearchChange} />);
         const searchElement = screen.getByRole("combobox");
-        fireEvent.change(searchElement, { target: { value: "L" } });
-        return await waitFor(() =>
-            expect(global.fetch).toHaveBeenCalledTimes(1)
-        );
+        await userEvent.type(searchElement, "L");
+        return expect(screen.findAllByRole("option")).resolves.toHaveLength(2);
     });
 
-    it("should load options when entering input", async () => {
-        jest.spyOn(global, "fetch").mockImplementationOnce(() => {
-            return Promise.resolve({
-                json: () =>
-                    Promise.resolve({
-                        data: [
-                            {
-                                latitude: 12.3,
-                                longitude: 382.2,
-                                name: "London",
-                                countryCode: "GB",
-                            },
-                            {
-                                latitude: 272.3,
-                                longitude: 312.2,
-                                name: "Lubango",
-                                countryCode: "AO",
-                            },
-                        ],
-                    }),
-            });
-        });
-
+    it("should display option after selected", async () => {
         render(<Search onSearchChange={mockOnSearchChange} />);
         const searchElement = screen.getByRole("combobox");
-        fireEvent.change(searchElement, { target: { value: "L" } });
-        return expect(screen.findAllByRole("option")).resolves.toHaveLength(2);
+        await userEvent.type(searchElement, "L");
+        const optionElement = await screen.findByRole("option", {
+            name: "London, GB",
+        });
+        await userEvent.click(optionElement);
+        return expect(screen.getByText("London, GB")).toBeInTheDocument();
     });
 });
