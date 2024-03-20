@@ -5,10 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 async function enableMocking() {
-    if (
-        process.env.NODE_ENV !== "development" ||
-        process.env.REACT_APP_ENABLE_MOCK !== "true"
-    ) {
+    if (process.env.NODE_ENV !== "development") {
         return;
     }
 
