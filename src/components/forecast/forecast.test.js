@@ -88,4 +88,10 @@ describe("forecast component", () => {
         const titleElement = screen.getByText(/daily/i);
         return expect(titleElement).toBeInTheDocument();
     });
+
+    it("should have a number of weather icons equal to number of forecast days", () => {
+        render(<Forecast data={mockData} />);
+        const imageElements = screen.getAllByAltText("weather");
+        return expect(imageElements).toHaveLength(2);
+    });
 });
