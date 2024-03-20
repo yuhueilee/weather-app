@@ -111,4 +111,10 @@ describe("forecast component", () => {
         const labelElement = screen.getByTestId("forecast-description-1");
         return expect(labelElement.textContent).toBe("broken clouds");
     });
+
+    it("should display min and max temperature", () => {
+        render(<Forecast data={mockData} />);
+        const labelElement = screen.getByTestId("forecast-temperature-0");
+        return expect(labelElement.textContent).toBe("9°C /8°C");
+    });
 });

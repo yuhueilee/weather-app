@@ -48,6 +48,13 @@ const Forecast = ({ data }) => {
                                     >
                                         {item.weather[0].description}
                                     </label>
+                                    <label
+                                        className="min-max"
+                                        data-testid={`forecast-temperature-${index}`}
+                                    >
+                                        {Math.round(item.main.temp_max)}°C /
+                                        {Math.round(item.main.temp_min)}°C
+                                    </label>
                                 </div>
                             </AccordionItemButton>
                         </AccordionItemHeading>
