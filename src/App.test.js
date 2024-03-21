@@ -12,6 +12,6 @@ describe("app component", () => {
             name: "London, GB",
         });
         await userEvent.click(optionElement);
-        return expect(screen.getByText("Thursday")).toBeInTheDocument();
+        return expect(screen.getByText("Daily")).toBeInTheDocument();
     });
 });
