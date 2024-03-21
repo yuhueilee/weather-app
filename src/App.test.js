@@ -12,6 +12,6 @@ describe("app component", () => {
             name: "London, GB",
         });
         await userEvent.click(optionElement);
-        return expect(screen.getByText("overcast clouds")).toBeInTheDocument();
+        return expect(screen.getByText("broken clouds")).toBeInTheDocument();
     });
 });
