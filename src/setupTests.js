@@ -14,7 +14,10 @@ beforeAll(() => {
     });
 });
 afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+afterAll(() => {
+    jest.useRealTimers();
+    server.close();
+});
 
 // Log the unhandled requests for debugging purpose.
 // learn more: https://mswjs.io/docs/api/life-cycle-events#requestunhandled
