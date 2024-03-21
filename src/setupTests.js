@@ -7,8 +7,6 @@ import "../jest.polyfills";
 import { server } from "./mocks/server";
 
 beforeAll(() => {
-    jest.useFakeTimers({ toFake: ["Date"] }); // tell Jest to use a different timer implementation.
-    jest.setSystemTime(new Date("20 Mar 2024 00:12:00 GMT").getTime()); // mock the current day to be Wednesday
     server.listen({
         onUnhandledRequest: "error", // learn more: https://mswjs.io/docs/best-practices/avoid-request-assertions/#unhandled-requests
     });
