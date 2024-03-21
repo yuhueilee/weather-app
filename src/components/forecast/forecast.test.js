@@ -83,10 +83,6 @@ const mockData = {
 };
 
 describe("forecast component", () => {
-    afterAll(() => {
-        jest.useRealTimers();
-    });
-
     it("should display title", () => {
         render(<Forecast data={mockData} />);
         const titleElement = screen.getByText(/daily/i);
