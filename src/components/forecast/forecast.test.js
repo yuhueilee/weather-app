@@ -83,9 +83,13 @@ const mockData = {
 };
 
 describe("forecast component", () => {
-    beforeEach(() => {
-        // Mock the current day to be Wednesday.
-        global.Date.getDay = jest.fn(() => new Date("2024-03-20").getDay());
+    beforeAll(() => {
+        jest.useFakeTimers("modern"); // tell Jest to use a different timer implementation.
+        jest.setSystemTime(new Date("20 Mar 2024 00:12:00 GMT").getTime()); // mock the current day to be Wednesday
+    });
+
+    afterAll(() => {
+        jest.useRealTimers();
     });
 
     it("should display title", () => {
